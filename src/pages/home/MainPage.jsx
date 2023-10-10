@@ -4,60 +4,165 @@ import CardList from "../../components/Card/CardList";
 const MainPage = () => {
   const productList = [
     {
-      id: "P00000KP",
+      id: "1",
       name: "Denim Shirt Jacket-Black",
       price: 119000,
       img: ["../src/assets/images/p1.jpg", "../src/assets/images/p1-2.png"],
+
       buySize: {
-        s: 0,
-        m: 0,
-        l: 0,
+        white: { s: 0, m: 0, l: 0 },
+        navy: { s: 0, m: 0, l: 0 },
+        khaki: { s: 0, m: 0, l: 0 },
       },
       buyQuantity: 0,
+
       stock: {
-        s: 5,
-        m: 6,
-        l: 4,
+        white: { s: 1, m: 1, l: 1 },
+        navy: { s: 1, m: 1, l: 1 },
+        khaki: { s: 1, m: 1, l: 1 },
       },
-      totalStock: 15,
+
+      totalStock: 9,
+      category: "tops-t-shirts",
     },
     {
-      id: "P00000KO",
+      id: "2",
       name: "GOALSTUDIO Delight Tote Bag",
       price: 95200,
       img: ["../src/assets/images/p2.jpg"],
+      buySize: {
+        black: { s: 0, m: 0, l: 0 },
+        navy: { s: 0, m: 0, l: 0 },
+        khaki: { s: 0, m: 0, l: 0 },
+      },
       buyQuantity: 0,
-      totalStock: 7,
+      stock: {
+        black: { s: 1, m: 1, l: 1 },
+        navy: { s: 1, m: 1, l: 1 },
+        khaki: { s: 1, m: 1, l: 1 },
+      },
+      totalStock: 10,
+      category: "hoodies-sweatshirts",
     },
     {
-      id: "P00000KQ",
+      id: "3",
       name: "Denim Shirt Jacket-Blue",
       price: 119000,
       img: ["../src/assets/images/p3.jpg", "../src/assets/images/p3-2.png"],
       buySize: {
-        s: 0,
-        m: 0,
-        l: 0,
+        white: { s: 0, m: 0, l: 0 },
+        navy: { s: 0, m: 0, l: 0 },
+        khaki: { s: 0, m: 0, l: 0 },
       },
       buyQuantity: 0,
       stock: {
-        s: 5,
-        m: 6,
-        l: 4,
+        white: { s: 1, m: 0, l: 2 },
+        navy: { s: 0, m: 1, l: 30 },
+        khaki: { s: 10, m: 10, l: 0 },
       },
       totalStock: 15,
+      category: "tops-t-shirts",
     },
 
     {
-      id: "P00000KA",
+      id: "4",
       name: "GOALSTUDIO Delight Bag",
       price: 119000,
       img: ["../src/assets/images/p4.jpg", "../src/assets/images/p4-2.png"],
+      buySize: {
+        black: { s: 0, m: 0, l: 0 },
+        navy: { s: 0, m: 0, l: 0 },
+        khaki: { s: 0, m: 0, l: 0 },
+      },
       buyQuantity: 0,
+      stock: {
+        black: { s: 1, m: 1, l: 1 },
+        navy: { s: 1, m: 1, l: 1 },
+        khaki: { s: 1, m: 1, l: 1 },
+      },
       totalStock: 3,
+      category: "tops-t-shirts",
+    },
+
+    {
+      id: "5",
+      name: "Denim Shirt Jacket-Black",
+      price: 119000,
+      img: ["../src/assets/images/p1-2.png", "../src/assets/images/p1.jpg"],
+      buySize: {
+        black: { s: 0, m: 0, l: 0 },
+        navy: { s: 0, m: 0, l: 0 },
+        khaki: { s: 0, m: 0, l: 0 },
+      },
+      buyQuantity: 0,
+      stock: {
+        black: { s: 10, m: 10, l: 10 },
+        navy: { s: 30, m: 0, l: 20 },
+        khaki: { s: 0, m: 20, l: 10 },
+      },
+      totalStock: 15,
+      category: "tops-t-shirts",
+    },
+    {
+      id: "6",
+      name: "GOALSTUDIO Delight Tote Bag",
+      price: 95200,
+      img: ["../src/assets/images/p2.jpg"],
+      buySize: {
+        black: { s: 0, m: 0, l: 0 },
+        navy: { s: 0, m: 0, l: 0 },
+        khaki: { s: 0, m: 0, l: 0 },
+      },
+      buyQuantity: 0,
+      stock: {
+        black: { s: 10, m: 10, l: 10 },
+        navy: { s: 30, m: 0, l: 20 },
+        khaki: { s: 0, m: 20, l: 10 },
+      },
+      totalStock: 10,
+      category: "tops-t-shirts",
+    },
+    {
+      id: "7",
+      name: "Denim Shirt Jacket-Blue",
+      price: 119000,
+      img: ["../src/assets/images/p3-2.png", "../src/assets/images/p3.jpg"],
+      buySize: {
+        black: { s: 0, m: 0, l: 0 },
+        navy: { s: 0, m: 0, l: 0 },
+        khaki: { s: 0, m: 0, l: 0 },
+      },
+      buyQuantity: 0,
+      stock: {
+        black: { s: 10, m: 0, l: 10 },
+        navy: { s: 10, m: 0, l: 10 },
+        khaki: { s: 10, m: 0, l: 10 },
+      },
+      totalStock: 15,
+      category: "pants",
+    },
+
+    {
+      id: "8",
+      name: "GOALSTUDIO Delight Bag",
+      price: 119000,
+      img: ["../src/assets/images/p4-2.png", "../src/assets/images/p4.jpg"],
+      buySize: {
+        black: { s: 0, m: 0, l: 0 },
+        navy: { s: 0, m: 0, l: 0 },
+        khaki: { s: 0, m: 0, l: 0 },
+      },
+      buyQuantity: 0,
+      stock: {
+        black: { s: 10, m: 10, l: 10 },
+        navy: { s: 30, m: 0, l: 20 },
+        khaki: { s: 0, m: 20, l: 10 },
+      },
+      totalStock: 3,
+      category: "bundle",
     },
   ];
-  
+
   //카드 생성
   const renderCard = (product) => {
     return (

@@ -12,129 +12,172 @@ const SubPage = () => {
 
   const productList = [
     {
-      id: "P00000KA",
+      id: "1",
       name: "Denim Shirt Jacket-Black",
       price: 119000,
       img: ["../src/assets/images/p1.jpg", "../src/assets/images/p1-2.png"],
+
       buySize: {
-        s: 0,
-        m: 0,
-        l: 0,
+        black: { s: 0, m: 0, l: 0 },
+        navy: { s: 0, m: 0, l: 0 },
+        khaki: { s: 0, m: 0, l: 0 },
       },
       buyQuantity: 0,
+
       stock: {
-        s: 5,
-        m: 6,
-        l: 4,
+        black: { s: 1, m: 1, l: 1 },
+        navy: { s: 1, m: 1, l: 1 },
+        khaki: { s: 1, m: 1, l: 1 },
       },
-      totalStock: 15,
+
+      totalStock: 9,
       category: "tops-t-shirts",
     },
     {
-      id: "P00000KB",
+      id: "2",
       name: "GOALSTUDIO Delight Tote Bag",
       price: 95200,
       img: ["../src/assets/images/p2.jpg"],
+      buySize: {
+        black: { s: 0, m: 0, l: 0 },
+        navy: { s: 0, m: 0, l: 0 },
+        khaki: { s: 0, m: 0, l: 0 },
+      },
       buyQuantity: 0,
+      stock: {
+        black: { s: 1, m: 1, l: 1 },
+        navy: { s: 1, m: 1, l: 1 },
+        khaki: { s: 1, m: 1, l: 1 },
+      },
       totalStock: 10,
       category: "hoodies-sweatshirts",
     },
     {
-      id: "P00000KC",
+      id: "3",
       name: "Denim Shirt Jacket-Blue",
       price: 119000,
       img: ["../src/assets/images/p3.jpg", "../src/assets/images/p3-2.png"],
       buySize: {
-        s: 0,
-        m: 0,
-        l: 0,
+        black: { s: 0, m: 0, l: 0 },
+        navy: { s: 0, m: 0, l: 0 },
+        khaki: { s: 0, m: 0, l: 0 },
       },
       buyQuantity: 0,
       stock: {
-        s: 5,
-        m: 6,
-        l: 4,
+        black: { s: 1, m: 0, l: 2 },
+        navy: { s: 0, m: 1, l: 30 },
+        khaki: { s: 10, m: 10, l: 0 },
       },
       totalStock: 15,
       category: "tops-t-shirts",
     },
 
     {
-      id: "P00000KD",
+      id: "4",
       name: "GOALSTUDIO Delight Bag",
       price: 119000,
       img: ["../src/assets/images/p4.jpg", "../src/assets/images/p4-2.png"],
+      buySize: {
+        black: { s: 0, m: 0, l: 0 },
+        navy: { s: 0, m: 0, l: 0 },
+        khaki: { s: 0, m: 0, l: 0 },
+      },
       buyQuantity: 0,
+      stock: {
+        black: { s: 1, m: 1, l: 1 },
+        navy: { s: 1, m: 1, l: 1 },
+        khaki: { s: 1, m: 1, l: 1 },
+      },
       totalStock: 3,
       category: "tops-t-shirts",
     },
 
     {
-      id: "P00000KE",
+      id: "5",
       name: "Denim Shirt Jacket-Black",
       price: 119000,
       img: ["../src/assets/images/p1-2.png", "../src/assets/images/p1.jpg"],
       buySize: {
-        s: 0,
-        m: 0,
-        l: 0,
+        black: { s: 0, m: 0, l: 0 },
+        navy: { s: 0, m: 0, l: 0 },
+        khaki: { s: 0, m: 0, l: 0 },
       },
       buyQuantity: 0,
       stock: {
-        s: 5,
-        m: 6,
-        l: 4,
+        black: { s: 10, m: 10, l: 10 },
+        navy: { s: 30, m: 0, l: 20 },
+        khaki: { s: 0, m: 20, l: 10 },
       },
       totalStock: 15,
       category: "tops-t-shirts",
     },
     {
-      id: "P00000KF",
+      id: "6",
       name: "GOALSTUDIO Delight Tote Bag",
       price: 95200,
       img: ["../src/assets/images/p2.jpg"],
+      buySize: {
+        black: { s: 0, m: 0, l: 0 },
+        navy: { s: 0, m: 0, l: 0 },
+        khaki: { s: 0, m: 0, l: 0 },
+      },
       buyQuantity: 0,
+      stock: {
+        black: { s: 10, m: 10, l: 10 },
+        navy: { s: 30, m: 0, l: 20 },
+        khaki: { s: 0, m: 20, l: 10 },
+      },
       totalStock: 10,
       category: "tops-t-shirts",
     },
     {
-      id: "P00000KG",
+      id: "7",
       name: "Denim Shirt Jacket-Blue",
       price: 119000,
       img: ["../src/assets/images/p3-2.png", "../src/assets/images/p3.jpg"],
       buySize: {
-        s: 0,
-        m: 0,
-        l: 0,
+        black: { s: 0, m: 0, l: 0 },
+        navy: { s: 0, m: 0, l: 0 },
+        khaki: { s: 0, m: 0, l: 0 },
       },
       buyQuantity: 0,
       stock: {
-        s: 5,
-        m: 6,
-        l: 4,
+        black: { s: 10, m: 0, l: 10 },
+        navy: { s: 10, m: 0, l: 10 },
+        khaki: { s: 10, m: 0, l: 10 },
       },
       totalStock: 15,
       category: "pants",
     },
 
     {
-      id: "P00000KH",
+      id: "8",
       name: "GOALSTUDIO Delight Bag",
       price: 119000,
       img: ["../src/assets/images/p4-2.png", "../src/assets/images/p4.jpg"],
+      buySize: {
+        black: { s: 0, m: 0, l: 0 },
+        navy: { s: 0, m: 0, l: 0 },
+        khaki: { s: 0, m: 0, l: 0 },
+      },
       buyQuantity: 0,
+      stock: {
+        black: { s: 10, m: 10, l: 10 },
+        navy: { s: 30, m: 0, l: 20 },
+        khaki: { s: 0, m: 20, l: 10 },
+      },
       totalStock: 3,
       category: "bundle",
     },
   ];
-//한 페이지 데이터 개수 설정
+  //한 페이지 데이터 개수 설정
   const sliceData = (data) => {
     if (data) {
       let result = data.slice(offset, offset + limit);
       return result;
     }
   };
-//숫자로 페이지 이동
+  //숫자로 페이지 이동
   const changePage = (e) => {
     if (category === null) setSearchParams({ page: e.target.value });
     else
@@ -244,7 +287,7 @@ const SubPage = () => {
             TOPS & T-SHIRTS
           </S.StyledLink>
           <S.StyledLink
-            to={`?category=hoodies-sweatshirts`}
+            to={`?category=hoodies-sweatshirts&page=1`}
             className={
               category === "hoodies-sweatshirts" ? "selected" : "default"
             }
@@ -252,13 +295,13 @@ const SubPage = () => {
             HOODIES & SWEATSHIRTS
           </S.StyledLink>
           <S.StyledLink
-            to={`?category=pants`}
+            to={`?category=pants&page=1`}
             className={category === "pants" ? "selected" : "default"}
           >
             PANTS
           </S.StyledLink>
           <S.StyledLink
-            to={`?category=bundle`}
+            to={`?category=bundle&page=1`}
             className={category === "bundle" ? "selected" : "default"}
           >
             BUNDLE

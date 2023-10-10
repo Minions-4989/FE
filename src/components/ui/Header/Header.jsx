@@ -131,6 +131,7 @@ const Nav = styled.ul`
 `;
 const UserArea = styled.div`
   display: flex;
+  min-width: 190px;
   font-size: 12px;
   color: #999;
   letter-spacing: 0.03em;
@@ -154,6 +155,7 @@ const CartCount = styled.span`
 `;
 const Logo = styled.div`
   margin-left: 7rem;
+  min-width: 2rem;
 `;
 const NavCategory = styled.li`
   padding: 8px 0 30px;

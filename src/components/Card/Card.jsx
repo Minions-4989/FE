@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Card = ({ id, name, price, img, totalStock, productData }) => {
-  const soldout = "/soldout.png";
+  const soldout = "../src/assets/images/soldout.png";
   return (
     <ItemListBox to={`/product/${id}`} state={{ data: productData }}>
       <ThumbnailDiv>
