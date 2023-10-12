@@ -4,13 +4,14 @@ import { RouterProvider } from "react-router-dom";
 import theme from "./styles/theme";
 import GlobalStyle from "./styles/globalStyle";
 import { ThemeProvider } from "styled-components";
-// import { Provider } from "react-redux";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <ThemeProvider theme={theme}>
     <GlobalStyle />
-    {/* <Provider store={store}> */}
+    <Provider store={store}>
     <RouterProvider router={Routers} />
-    {/* </Provider> */}
+    </Provider>
   </ThemeProvider>
 );
