@@ -1,5 +1,4 @@
-import styled from "styled-components";
-import "./detail.css";
+import * as S from "./ProductDetailPageStyle";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -7,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 const ProductDetailPage = () => {
-  const soldout = "/soldout.png";
+  const soldout = "../src/assets/images/soldout.png";
 
   const { data: productData } = useLocation().state;
 
@@ -15,6 +14,7 @@ const ProductDetailPage = () => {
   const [size, setSize] = useState({ s: 0, m: 0, l: 0 });
   const [nonSize, setNonSize] = useState(1);
 
+  //input 수량 증가
   const handleUpButton = (e) => {
     switch (e.target.value) {
       case "s":
@@ -37,6 +37,7 @@ const ProductDetailPage = () => {
         break;
     }
   };
+  //input 수량 감소
   const handleDownButton = (e) => {
     switch (e.target.value) {
       case "s":
@@ -59,6 +60,7 @@ const ProductDetailPage = () => {
         break;
     }
   };
+  //input에서 직접 숫자 입력 시
   const changeQuantity = (e) => {
     switch (e.target.id) {
       case "s":
@@ -81,7 +83,7 @@ const ProductDetailPage = () => {
         break;
     }
   };
-
+  // x 버튼 클릭 시
   const deleteItem = (e) => {
     switch (e.target.value) {
       case "s":
@@ -103,7 +105,7 @@ const ProductDetailPage = () => {
         break;
     }
   };
-
+  //셀렉트박스 선택 시
   const handleSelect = (e) => {
     if (isInitial) setIsInitial(false);
 
@@ -127,7 +129,7 @@ const ProductDetailPage = () => {
         break;
     }
   };
-
+  //서버에 보낼 데이터
   const setBuySize = () => {
     if (productData.buySize) {
       productData.buySize = size;
@@ -139,10 +141,10 @@ const ProductDetailPage = () => {
 
   useEffect(() => {
     setBuySize();
-    console.log("size", size);
-    console.log("buySize", productData.buySize);
-    console.log("productData", productData);
-    console.log("nonSize", nonSize);
+    // console.log("size", size);
+    // console.log("buySize", productData.buySize);
+    // console.log("productData", productData);
+    // console.log("nonSize", nonSize);
     if (productData.totalStock === 0) {
       setNonSize(0);
     }
@@ -167,30 +169,35 @@ const ProductDetailPage = () => {
 
   return (
     <>
-      <Section>
-        <div className="img-area">
-          <ProductImg default={productData.img}>
+      <S.Section>
+        <S.ImgArea>
+          {/* 이미지 슬라이더 */}
+          <S.ProductImg default={productData.img}>
             <div>
               <Slider {...settings}>{productData.img.map(renderImg)}</Slider>
             </div>
-          </ProductImg>
-        </div>
-        <div className="info-area">
-          <div className="title">
+          </S.ProductImg>
+        </S.ImgArea>
+        {/* 제품 정보 */}
+        <S.InfoArea>
+          <S.ProductTitle>
             {productData.name}
+            {/* 제품 재고 없을 시 */}
             {productData.totalStock === 0 && (
-              <div className="sold-out">
+              <S.SoldOut>
                 <img src={soldout} alt="" />
-              </div>
+              </S.SoldOut>
             )}
-          </div>
-          <div className="price">{productData.price.toLocaleString()}원</div>
-
+          </S.ProductTitle>
+          <S.ProductPrice>
+            {productData.price.toLocaleString()}원
+          </S.ProductPrice>
+          {/* 제품 옵션(사이즈)이 있는 제품일 경우 옵션 선택*/}
           {productData?.buySize && (
-            <div className="tr">
-              <div className="th">사이즈</div>
-              <div className="td">
-                <select className="option" onChange={handleSelect}>
+            <S.TalbeRow>
+              <S.TableHead>사이즈</S.TableHead>
+              <S.TableData>
+                <S.Options className="option" onChange={handleSelect}>
                   <option key="" value="" disabled={isInitial ? false : true}>
                     - [필수] 옵션을 선택해 주세요 -
                   </option>
@@ -215,283 +222,165 @@ const ProductDetailPage = () => {
                   >
                     L {productData.stock.l === 0 && <span> [품절]</span>}
                   </option>
-                </select>
-              </div>
-            </div>
+                </S.Options>
+              </S.TableData>
+            </S.TalbeRow>
           )}
-
+          {/* 선택한 옵션 수량 확인하는 영역 */}
           <div className="option-selected-area">
+            {/* 옵션선택이 없는 제품일 경우 바로 수량 선택 */}
             {!productData.buySize && (
-              <div className="option-selected">
+              <S.OptionSelected>
                 <p>{productData.name}</p>
-                <div className="input-cnt">
-                  <input
+                <S.InputDiv>
+                  <S.InputNumber
                     id="non"
                     type="number"
                     value={nonSize}
                     onChange={changeQuantity}
                   />
-                  <div className="button-img">
-                    <button
-                      className="cntButton-up"
-                      value="non"
-                      onClick={handleUpButton}
-                    />
-                    <button
-                      className="cntButton-down"
+                  <S.InputBtnImgDiv>
+                    <S.CountUpBtn value="non" onClick={handleUpButton} />
+                    <S.CountDownBtn
                       value="non"
                       onClick={handleDownButton}
                       disabled={nonSize === 1 ? true : false}
                     />
-                  </div>
-                </div>
+                  </S.InputBtnImgDiv>
+                </S.InputDiv>
 
-                <div className="option-price">
+                <S.SelectedOptionPrice>
                   {(productData.price * nonSize).toLocaleString()}원
-                </div>
-              </div>
+                </S.SelectedOptionPrice>
+              </S.OptionSelected>
             )}
-
+            {/* 옵션을 선택해서 옵션(사이즈s)가 1개 이상일 경우 */}
             {size.s > 0 && (
-              <div className="option-selected">
+              <S.OptionSelected>
                 <p>
                   {productData.name}
                   <br />-<span>S</span>
                 </p>
-                <div className="input-cnt">
-                  <input
+                <S.InputDiv>
+                  <S.InputNumber
                     id="s"
                     type="number"
                     value={size.s}
                     onChange={changeQuantity}
                   />
-                  <div className="button-img">
-                    <button
-                      className="cntButton-up"
-                      value="s"
-                      onClick={handleUpButton}
-                    />
-                    <button
-                      className="cntButton-down"
+                  <S.InputBtnImgDiv>
+                    <S.CountUpBtn value="s" onClick={handleUpButton} />
+                    <S.CountDownBtn
                       value="s"
                       onClick={handleDownButton}
                       disabled={size.s === 1 ? true : false}
                     />
-                  </div>
-                </div>
-                <button
-                  className="delete-option"
-                  onClick={deleteItem}
-                  value="s"
-                />
-                <div className="option-price">
+                  </S.InputBtnImgDiv>
+                </S.InputDiv>
+                <S.DeleteOptionBtn onClick={deleteItem} value="s" />
+                <S.SelectedOptionPrice>
                   {(productData.price * size.s).toLocaleString()}원
-                </div>
-              </div>
+                </S.SelectedOptionPrice>
+              </S.OptionSelected>
             )}
 
             {size.m > 0 && (
-              <div className="option-selected">
+              <S.OptionSelected>
                 <p>
                   {productData.name}
                   <br />-<span>M</span>
                 </p>
-                <div className="input-cnt">
-                  <input
+                <S.InputDiv>
+                  <S.InputNumber
                     id="m"
                     type="number"
                     value={size.m}
                     onChange={changeQuantity}
                   />
-                  <div className="button-img">
-                    <button
-                      className="cntButton-up"
-                      value="m"
-                      onClick={handleUpButton}
-                    />
-                    <button
-                      className="cntButton-down"
+                  <S.InputBtnImgDiv>
+                    <S.CountUpBtn value="m" onClick={handleUpButton} />
+                    <S.CountDownBtn
                       value="m"
                       onClick={handleDownButton}
                       disabled={size.m === 1 ? true : false}
                     />
-                  </div>
-                </div>
-                <button
-                  className="delete-option"
-                  onClick={deleteItem}
-                  value="m"
-                />
-                <div className="option-price">
+                  </S.InputBtnImgDiv>
+                </S.InputDiv>
+                <S.DeleteOptionBtn onClick={deleteItem} value="m" />
+                <S.SelectedOptionPrice>
                   {(productData.price * size.m).toLocaleString()}원
-                </div>
-              </div>
+                </S.SelectedOptionPrice>
+              </S.OptionSelected>
             )}
 
             {size.l > 0 && (
-              <div className="option-selected">
+              <S.OptionSelected>
                 <p>
                   {productData.name}
                   <br />-<span>L</span>
                 </p>
-                <div className="input-cnt">
-                  <input
+                <S.InputDiv>
+                  <S.InputNumber
                     id="l"
                     type="number"
                     value={size.l}
                     onChange={changeQuantity}
                   />
-                  <div className="button-img">
-                    <button
-                      className="cntButton-up"
-                      value="l"
-                      onClick={handleUpButton}
-                    />
-                    <button
-                      className="cntButton-down"
+                  <S.InputBtnImgDiv>
+                    <S.CountUpBtn value="l" onClick={handleUpButton} />
+                    <S.CountDownBtn
                       value="l"
                       onClick={handleDownButton}
                       disabled={size.l === 1 ? true : false}
                     />
-                  </div>
-                </div>
-                <button
-                  className="delete-option"
-                  onClick={deleteItem}
-                  value="l"
-                />
-                <div className="option-price">
+                  </S.InputBtnImgDiv>
+                </S.InputDiv>
+                <S.DeleteOptionBtn onClick={deleteItem} value="l" />
+                <S.SelectedOptionPrice>
                   {(productData.price * size.l).toLocaleString()}원
-                </div>
-              </div>
+                </S.SelectedOptionPrice>
+              </S.OptionSelected>
             )}
           </div>
 
-          <div className="total-price">
-            TOTAL :{" "}
+          <S.TotalPriceDiv>
+            TOTAL :{/* 옵션(사이즈)가 있는 제품일 경우 */}
             {productData.buySize && (
-              <span>
+              <S.TotalPriceSpan>
                 {(
                   productData.price *
                   (size.s + size.m + size.l)
                 ).toLocaleString()}
                 원
-              </span>
+              </S.TotalPriceSpan>
             )}
+            {/* 옵션(사이즈)가 없는 제품일 경우 */}
             {!productData.buySize && (
-              <span>{(productData.price * nonSize).toLocaleString()}원</span>
+              <S.TotalPriceSpan>
+                {(productData.price * nonSize).toLocaleString()}원
+              </S.TotalPriceSpan>
             )}
-          </div>
+          </S.TotalPriceDiv>
+          {/* 품절일 경우 */}
           {productData.totalStock != 0 && (
             <>
-              <div className="buy-button">구매하기</div>
-              <div className="btn-area-low">
-                <div className="btn cart">장바구니</div>
-                <div className="btn like">관심상품</div>
-              </div>
+              <S.LowBtnArea>
+                <S.LowBtn>장바구니</S.LowBtn>
+                <S.LowBtn>관심상품</S.LowBtn>
+              </S.LowBtnArea>
             </>
           )}
+          {/* 품절이 아닐 경우 */}
           {productData.totalStock === 0 && (
-            <div className="btn-area-low">
-              <div className="btn cart">품절</div>
-              <div className="btn like">관심상품</div>
-            </div>
+            <S.LowBtnArea>
+              <S.LowBtn>품절</S.LowBtn>
+              <S.LowBtn>관심상품</S.LowBtn>
+            </S.LowBtnArea>
           )}
-        </div>
-      </Section>
+        </S.InfoArea>
+      </S.Section>
     </>
   );
 };
 
 export default ProductDetailPage;
-
-const Section = styled.div`
-  padding: 60px 5% 0;
-  display: flex;
-  max-width: 1250px;
-  margin: auto;
-  margin-bottom: 10rem;
-`;
-
-const ProductImg = styled.div`
-  width: 60%;
-  max-height: 464px;
-  position: relative;
-  border: 1px solid #ececec;
-  img {
-    width: 100%;
-  }
-  @media all and (max-width: 768px) {
-    width: 100%;
-    padding: 0 20px;
-    box-sizing: border-box;
-  }
-
-  .slick-slider .slick-track,
-  .slick-slider .slick-list {
-    height: auto;
-  }
-
-  .slick-slide img {
-    width: 100%;
-    height: 100%;
-  }
-
-  .slick-dots {
-    display: flex !important;
-    justify-content: flex-start;
-    position: absolute;
-    bottom: -30px;
-    // @media screen and (max-width: 1370px) {
-    //   bottom: -40px;
-    // }
-    // @media screen and (max-width: 1330px) {
-    //   bottom: -60px;
-    // }
-    // @media screen and (max-width: 1290px) {
-    //   bottom: -80px;
-    // }
-    // @media screen and (max-width: 1250px) {
-    //   bottom: -100px;
-    // }
-    // @media screen and (max-width: 768px) {
-    //   bottom: -40px;
-    // }
-  }
-
-  .slick-dots li {
-    width: 95px;
-    height: auto;
-    margin: 0 0px;
-    padding: 0 15px 0 0;
-  }
-
-  .slick-dots li button {
-    width: auto;
-    height: auto;
-  }
-
-  .slick-dots li button:before {
-    width: 100px;
-    height: 100px;
-    background-size: 100px !important;
-    background: url(${(props) => props.default});
-    font-size: 0px;
-    opacity: 0.35;
-  }
-  ${(props) =>
-    props.default &&
-    props.default
-      .map(
-        (img, index) => `
-    .slick-dots li:nth-child(${index + 1}) button:before {
-      background: url(${img});
-    }
-  `
-      )
-      .join("")}
-
-  .slick-dots li.slick-active button:before {
-    opacity: 0.95;
-  }
-`;

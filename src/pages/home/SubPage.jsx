@@ -1,12 +1,13 @@
-import styled from "styled-components";
-import "./subpage.css";
-import CardLi from "../../components/Card/CardLi";
+import CardList from "../../components/Card/CardList";
 import { useEffect, useState } from "react";
+import * as S from "./SubPageStyle";
+import { useSearchParams } from "react-router-dom";
 const SubPage = () => {
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = parseInt(searchParams.get("page") || "1");
   const limit = 4;
   const offset = (page - 1) * limit;
-
   const [category, setCategory] = useState("");
 
   const productList = [
@@ -14,7 +15,7 @@ const SubPage = () => {
       id: "P00000KA",
       name: "Denim Shirt Jacket-Black",
       price: 119000,
-      img: ["/p1.jpg", "/p1-2.png"],
+      img: ["../src/assets/images/p1.jpg", "../src/assets/images/p1-2.png"],
       buySize: {
         s: 0,
         m: 0,
@@ -27,22 +28,22 @@ const SubPage = () => {
         l: 4,
       },
       totalStock: 15,
-      category: "TOPS & T-SHIRTS",
+      category: "tops-t-shirts",
     },
     {
       id: "P00000KB",
       name: "GOALSTUDIO Delight Tote Bag",
       price: 95200,
-      img: ["/p2.jpg"],
+      img: ["../src/assets/images/p2.jpg"],
       buyQuantity: 0,
       totalStock: 10,
-      category: "HOODIES & SWEATSHIRTS",
+      category: "hoodies-sweatshirts",
     },
     {
       id: "P00000KC",
       name: "Denim Shirt Jacket-Blue",
       price: 119000,
-      img: ["/p3.jpg", "/p3-2.png"],
+      img: ["../src/assets/images/p3.jpg", "../src/assets/images/p3-2.png"],
       buySize: {
         s: 0,
         m: 0,
@@ -55,24 +56,24 @@ const SubPage = () => {
         l: 4,
       },
       totalStock: 15,
-      category: "PANTS",
+      category: "tops-t-shirts",
     },
 
     {
       id: "P00000KD",
       name: "GOALSTUDIO Delight Bag",
       price: 119000,
-      img: ["/p4.jpg", "/p4-2.png"],
+      img: ["../src/assets/images/p4.jpg", "../src/assets/images/p4-2.png"],
       buyQuantity: 0,
       totalStock: 3,
-      category: "BUNDLE",
+      category: "tops-t-shirts",
     },
 
     {
       id: "P00000KE",
       name: "Denim Shirt Jacket-Black",
       price: 119000,
-      img: ["/p1-2.png", "/p1.jpg"],
+      img: ["../src/assets/images/p1-2.png", "../src/assets/images/p1.jpg"],
       buySize: {
         s: 0,
         m: 0,
@@ -85,22 +86,22 @@ const SubPage = () => {
         l: 4,
       },
       totalStock: 15,
-      category: "TOPS & T-SHIRTS",
+      category: "tops-t-shirts",
     },
     {
       id: "P00000KF",
       name: "GOALSTUDIO Delight Tote Bag",
       price: 95200,
-      img: ["/p2.jpg"],
+      img: ["../src/assets/images/p2.jpg"],
       buyQuantity: 0,
       totalStock: 10,
-      category: "TOPS & T-SHIRTS",
+      category: "tops-t-shirts",
     },
     {
       id: "P00000KG",
       name: "Denim Shirt Jacket-Blue",
       price: 119000,
-      img: ["/p3-2.png", "/p3.jpg"],
+      img: ["../src/assets/images/p3-2.png", "../src/assets/images/p3.jpg"],
       buySize: {
         s: 0,
         m: 0,
@@ -113,69 +114,60 @@ const SubPage = () => {
         l: 4,
       },
       totalStock: 15,
-      category: "PANTS",
+      category: "pants",
     },
 
     {
       id: "P00000KH",
       name: "GOALSTUDIO Delight Bag",
       price: 119000,
-      img: ["/p4-2.png", "/p4.jpg"],
+      img: ["../src/assets/images/p4-2.png", "../src/assets/images/p4.jpg"],
       buyQuantity: 0,
       totalStock: 3,
-      category: "BUNDLE",
+      category: "bundle",
     },
   ];
-
-  const sortByCategory = (value) => {
-    if (category === "") {
-      return productList;
-    } else {
-      const fitered = productList.filter((product) => {
-        return product.category === value;
-      });
-      return fitered;
-    }
-  };
-  const changeCategory = (e) => {
-    setCategory(e.target.value);
-    setPage(1);
-  };
-
-  //물품 개수가 limit 보다 작을 경우 올림
-  const maxPage = Math.ceil(sortByCategory(category).length / limit);
-  console.log(maxPage);
-
+//한 페이지 데이터 개수 설정
   const sliceData = (data) => {
     if (data) {
       let result = data.slice(offset, offset + limit);
       return result;
     }
   };
-
+//숫자로 페이지 이동
   const changePage = (e) => {
-    setPage(Number(e.target.value));
+    if (category === null) setSearchParams({ page: e.target.value });
+    else
+      setSearchParams({
+        category,
+        page: e.target.value,
+      });
   };
+  //화살표로 페이지 이동
   const changePagination = (e) => {
     switch (e.target.value) {
       case "first":
-        setPage(1);
+        if (category === null) setSearchParams({ page: 1 });
+        else setSearchParams({ category, page: 1 });
         break;
       case "prev":
-        setPage((prev) => prev - 1);
+        if (category === null) setSearchParams({ page: page - 1 });
+        else setSearchParams({ category, page: page - 1 });
         break;
       case "next":
-        setPage((prev) => prev + 1);
+        if (category === null) setSearchParams({ page: page + 1 });
+        else setSearchParams({ category, page: page + 1 });
         break;
       case "end":
-        setPage(maxPage);
+        if (category === null) setSearchParams({ page: maxPage });
+        else setSearchParams({ category, page: maxPage });
         break;
     }
   };
-
+  //카드 생성
   const renderCard = (product) => {
     return (
-      <CardLi
+      <CardList
         key={product.id}
         id={product.id}
         name={product.name}
@@ -185,131 +177,122 @@ const SubPage = () => {
       />
     );
   };
+  //페이지네이션 생성
   const renderPagination = () => {
     const result = [];
     for (let i = 0; i < maxPage; i++) {
       if (i === 0) {
         result.push(
-          <li className="page-first" key="1">
-            <button
+          <S.PaginationLiFirst key="1">
+            <S.PageBtn
               className={page === 1 ? "selected" : "num"}
               value="1"
               onClick={changePage}
             >
               1
-            </button>
-          </li>
+            </S.PageBtn>
+          </S.PaginationLiFirst>
         );
       } else {
         result.push(
-          <li className="page" key={i + 1}>
-            <button
+          <S.PaginationLi key={i + 1}>
+            <S.PageBtn
               className={page === i + 1 ? "selected" : "num"}
               value={i + 1}
               onClick={changePage}
             >
               {i + 1}
-            </button>
-          </li>
+            </S.PageBtn>
+          </S.PaginationLi>
         );
       }
     }
     return result;
   };
 
+  const handleChangeCategory = () => {
+    setCategory(searchParams.get("category"));
+  };
+
+  const sortByCategory = (value) => {
+    if (value === null) {
+      return productList;
+    } else {
+      const filtered = productList.filter((product) => {
+        return product.category === value;
+      });
+      return filtered;
+    }
+  };
+  //maxPage가 소수점일 경우 올림
+  const maxPage = Math.ceil(sortByCategory(category).length / limit);
+
   useEffect(() => {
-    sortByCategory("");
-  }, []);
+    handleChangeCategory();
+    sortByCategory(category);
+  }, [searchParams]);
 
   return (
-    <Section>
-      <div className="sub-title">
-        <div className="sub-list-title">APPAREL</div>
-        <div className="sub-list-select">
-          <button
-            className={
-              category === "TOPS & T-SHIRTS"
-                ? "sub-list-btn-selected"
-                : "sub-list-btn"
-            }
-            value="TOPS & T-SHIRTS"
-            onClick={changeCategory}
+    <S.Section>
+      <S.SectionTitle>
+        <S.SectionTitleText>APPAREL</S.SectionTitleText>
+        <S.SectionTitleCategory>
+          <S.StyledLink
+            to={`?category=tops-t-shirts&page=1`}
+            className={category === "tops-t-shirts" ? "selected" : "default"}
           >
             TOPS & T-SHIRTS
-          </button>
-          <button
+          </S.StyledLink>
+          <S.StyledLink
+            to={`?category=hoodies-sweatshirts`}
             className={
-              category === "HOODIES & SWEATSHIRTS"
-                ? "sub-list-btn-selected"
-                : "sub-list-btn"
+              category === "hoodies-sweatshirts" ? "selected" : "default"
             }
-            value="HOODIES & SWEATSHIRTS"
-            onClick={changeCategory}
           >
             HOODIES & SWEATSHIRTS
-          </button>
-          <button
-            className={
-              category === "PANTS" ? "sub-list-btn-selected" : "sub-list-btn"
-            }
-            value="PANTS"
-            onClick={changeCategory}
+          </S.StyledLink>
+          <S.StyledLink
+            to={`?category=pants`}
+            className={category === "pants" ? "selected" : "default"}
           >
             PANTS
-          </button>
-          <button
-            className={
-              category === "BUNDLE" ? "sub-list-btn-selected" : "sub-list-btn"
-            }
-            value="BUNDLE"
-            onClick={changeCategory}
+          </S.StyledLink>
+          <S.StyledLink
+            to={`?category=bundle`}
+            className={category === "bundle" ? "selected" : "default"}
           >
             BUNDLE
-          </button>
-        </div>
-      </div>
-      <ItemListGrid>
+          </S.StyledLink>
+        </S.SectionTitleCategory>
+      </S.SectionTitle>
+      <S.ItemListGrid>
         {sliceData(sortByCategory(category)).map(renderCard)}
-      </ItemListGrid>
-      <div className="pagination">
-        <button
-          className="first-page"
+      </S.ItemListGrid>
+      <S.Pagination>
+        <S.PageFirst
           value="first"
           onClick={changePagination}
           disabled={page === 1 ? true : false}
-        ></button>
-        <button
-          className="prev-page"
+        ></S.PageFirst>
+        <S.PagePrev
           value="prev"
           onClick={changePagination}
           disabled={page === 1 ? true : false}
-        ></button>
-        <ol>{renderPagination()}</ol>
-        <button
-          className="next-page"
+        ></S.PagePrev>
+        <S.PaginationOl>{renderPagination()}</S.PaginationOl>
+        <S.PageNext
           value="next"
           onClick={changePagination}
           disabled={page === maxPage ? true : false}
-        ></button>
-        <button
-          className="end-page"
+        ></S.PageNext>
+        <S.PageEnd
           value="end"
           onClick={changePagination}
           disabled={page === maxPage ? true : false}
-        ></button>
-      </div>
-    </Section>
+        ></S.PageEnd>
+      </S.Pagination>
+    </S.Section>
   );
 };
 
 export default SubPage;
-
-const Section = styled.div`
-  padding: 80px 5% 20px;
-`;
-
-const ItemListGrid = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  padding: 60px 5% 0;
-`;

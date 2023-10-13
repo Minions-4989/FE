@@ -1,9 +1,5 @@
+const Wrap = ({ children, ...props }) => {
+  return <div {...props}>{children}</div>;
+};
 
-
-const Wrap = ({ children, ...props}) => {
-	return (
-		<div {...props}>{children }</div>
-	)
-}
-
-export default Wrap
+export default Wrap;

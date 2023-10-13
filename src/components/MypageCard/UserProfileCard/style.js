@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Wrap from '../../ui/Wrap/Wrap';
 import Span from '../../ui/Span/Span';
 
-export const CardWrapper = styled.li`
+export const CardWrapper = styled.div`
   display: flex;
   flex: 1;
   gap: 30px;
@@ -18,6 +18,7 @@ export const ImgWrap = styled(Wrap)`
   border-radius: 50%;
   overflow: hidden;
 `;
+
 export const UserInfo = styled(Wrap)`
   display: flex;
   align-items: center;
@@ -32,7 +33,7 @@ export const UserName = styled(Span)`
   font-weight: 600;
 `;
 
-export const BenfitWrap = styled(Wrap)`
+export const BenefitWrap = styled(Wrap)`
   display: flex;
   height: 110px;
   font-weight: 600;
@@ -43,12 +44,19 @@ export const BenfitWrap = styled(Wrap)`
   flex: auto;
 `;
 
-export const BenfitItemWrap = styled(Wrap)`
+export const BenefitItemWrap = styled(Wrap)`
   display: flex;
   align-items: center;
   flex-direction: column;
   margin-left: 10px;
   gap: 10px;
+`;
+export const ImgIconTextWrap = styled(Wrap)`
+  display: flex;
+`
+export const ImgIconWrap = styled(Wrap)`
+  width: 16px;
+  height: 16px;  
 `;
 
 export const Button = styled.button`

@@ -1,6 +1,5 @@
-import "./MainPage.css";
 import styled from "styled-components";
-import CardLi from "../../components/Card/CardLi";
+import CardList from "../../components/Card/CardList";
 
 const MainPage = () => {
   const productList = [
@@ -8,7 +7,7 @@ const MainPage = () => {
       id: "P00000KP",
       name: "Denim Shirt Jacket-Black",
       price: 119000,
-      img: ["/p1.jpg", "/p1-2.png"],
+      img: ["../src/assets/images/p1.jpg", "../src/assets/images/p1-2.png"],
       buySize: {
         s: 0,
         m: 0,
@@ -26,7 +25,7 @@ const MainPage = () => {
       id: "P00000KO",
       name: "GOALSTUDIO Delight Tote Bag",
       price: 95200,
-      img: ["/p2.jpg"],
+      img: ["../src/assets/images/p2.jpg"],
       buyQuantity: 0,
       totalStock: 7,
     },
@@ -34,7 +33,7 @@ const MainPage = () => {
       id: "P00000KQ",
       name: "Denim Shirt Jacket-Blue",
       price: 119000,
-      img: ["/p3.jpg", "/p3-2.png"],
+      img: ["../src/assets/images/p3.jpg", "../src/assets/images/p3-2.png"],
       buySize: {
         s: 0,
         m: 0,
@@ -53,14 +52,16 @@ const MainPage = () => {
       id: "P00000KA",
       name: "GOALSTUDIO Delight Bag",
       price: 119000,
-      img: ["/p4.jpg", "/p4-2.png"],
+      img: ["../src/assets/images/p4.jpg", "../src/assets/images/p4-2.png"],
       buyQuantity: 0,
       totalStock: 3,
     },
   ];
+  
+  //카드 생성
   const renderCard = (product) => {
     return (
-      <CardLi
+      <CardList
         key={product.id}
         id={product.id}
         name={product.name}
